@@ -141,7 +141,7 @@
   const errorMsgElement = document.querySelector('span#errorMsg');
 
   const constraints = {
-    audio: false,
+    audio: true,
     video: {
 
       facingMode: "user"
@@ -153,6 +153,8 @@
     try {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       handleSuccess(stream);
+      document.getElementById('mic-status').innerText = 'Microphone is active';
+      document.getElementById('mic-status').style.color = 'lightgreen';
     } catch (e) {
       errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
     }
@@ -200,7 +202,7 @@
   <div class="bottom-bar">
     <div class="icon-button" style="margin-left: 50px;">
       <i class="fas fa-microphone"></i>
-      <h6>Mute</h6>
+      <h6 id="mic-status"></h6>
     </div>
     <div class="icon-button" style="margin-left: 50px;">
       <i class="fas fa-video"></i>
